@@ -38,8 +38,4 @@ jobs:
           touch ~/identity
           chmod 600 ~/identity
           echo "${{ secrets.KEY }}" > ~/identity
-
-
-      - name: Deploy via SSH
-        run: |
           ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} -i ~/identity 'bash ~/deploy.sh'
