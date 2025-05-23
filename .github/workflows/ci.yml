@@ -42,4 +42,4 @@ jobs:
 
       - name: Deploy via SSH
         run: |
-          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} -i ${{ secrets.KEY }} 'bash ~/deploy.sh'
+          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} -i ~/identity 'bash ~/deploy.sh'
