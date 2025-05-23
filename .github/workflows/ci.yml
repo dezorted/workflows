@@ -35,12 +35,11 @@ jobs:
 
       - name: Setup SSH
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+          touch ~/identity
+          chmod 600 ~/identity
+          echo ${{ secrets.KEY }} > ~/identity
 
 
       - name: Deploy via SSH
         run: |
-          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'bash ~/deploy.sh'
+          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} -i ${{ secrets.KEY }} 'bash ~/deploy.sh'
