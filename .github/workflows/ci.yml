@@ -35,4 +35,9 @@ jobs:
 
       - name: Deploy via SSH
         run: |
-          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} -i ${{ secrets.KEY }} 'bash ~/deploy.sh'
+          touch ~/identity
+          echo "${{ secrets.KEY }}" > ~/identity
+
+      - name: Deploy via SSH
+        run: |
+          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} -i ~/identity 'bash ~/deploy.sh'
